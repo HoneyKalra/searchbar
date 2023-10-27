@@ -255,10 +255,18 @@ let navbar=document.createElement("nav");
 setAttributes(navbar,{class:"flex items-center justify-between flex-wrap w-full bg-blue-500 p-1 text-white text-xs" });
 container.appendChild(header);
 header.appendChild(navbar);
+//painting logo //
+let logoLink=document.createElement("a");
+setAttributes(logoLink,{class:"w-36",alt:"#"});
+navbar.appendChild(logoLink);
+let logoImage=document.createElement("img");
+setAttributes(logoImage,{src: "https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fk-plus_3b0baa.png",class:"w-28 ml-8",alt:"website-logo"});
+logoLink.appendChild(logoImage);
 //painting form//
 let formEl=document.createElement("form");
 setAttributes(formEl,{id:"searchForm",autoComplete:"off",class:"w-full max-w-lg relative mx-auto flex  items-center gap-6"});
 navbar.appendChild(formEl);
+
 //painting label//
 let labelEl=document.createElement("label");
 setAttributes(labelEl,{for:"js-search-input"})
@@ -269,7 +277,7 @@ setAttributes(inputEl,{type:"text",id:"js-search-input",class:" w-72 mt-2 px-2 p
 formEl.appendChild(inputEl);
 //paint ul//
 let products=document.createElement("ul");
-setAttributes(products,{class:"js-products text-black absolute w-full top-full border bg-white hidden"});
+setAttributes(products,{class:"js-products text-black absolute w-full top-10 border bg-white hidden"});
 formEl.appendChild(products);
 //creating links//
 //myAccount link//
@@ -288,13 +296,13 @@ cart.textContent="Cart";
 formEl.appendChild(cart);
 //painting toggle//
 let toggleButton=document.createElement("button");
-setAttributes(toggleButton,{class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full border-2 border-white"});
-toggleButton.textContent="Light";
+setAttributes(toggleButton,{class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded-full border-2 border-white"});
+toggleButton.textContent="Dark";
 formEl.appendChild(toggleButton);
 
 let searchInput=document.getElementById("js-search-input");
 
-//light mode variable//
+
 
 function productListing(value) {
 
@@ -345,25 +353,22 @@ function enteredValue(ev) {
 }
 //input event has been listened here//
 searchInput.addEventListener("input", enteredValue);
-
+//light mode variable//
 let lightMode= false;
 function themeToggler(e){
     e.preventDefault();
-    
-    
-    
-    if(lightMode === false){
-        
-        toggleButton.textContent="Dark";
+
+     if(lightMode === false){
+        toggleButton.textContent="Light";
         document.body.style.backgroundColor="black"; 
         toggleButton.style.color="white";
         formEl.style.color="white";
         lightMode = true;
-    }
+     }
     
    else{
     document.body.style.backgroundColor="white"; 
-    toggleButton.textContent="Light";
+    toggleButton.textContent="Dark";
     formEl.style.color="black";
     toggleButton.style.color="black";
     toggleButton.style.border="2px solid black";
@@ -372,7 +377,5 @@ function themeToggler(e){
 
 }
 
-
-
-  //add event listner on toogle btn//
+ //add event listner on toogle btn//
 toggleButton.addEventListener("click",themeToggler)
