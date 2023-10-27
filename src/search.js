@@ -240,9 +240,61 @@ let items = [
         }
     }
 ]
+//function to set attributes//
+function setAttributes(el, attrs) {
+    for(var key in attrs) {
+      el.setAttribute(key, attrs[key]);
+    }
+  }
+let container=document.querySelector("div");
+//creating header//  
+let header=document.createElement("header");
+setAttributes(header,{class:"w-full"})
+//painting Nav//
+let navbar=document.createElement("nav");
+setAttributes(navbar,{class:"flex items-center justify-between flex-wrap w-full bg-blue-500 p-1 text-white text-xs" });
+container.appendChild(header);
+header.appendChild(navbar);
+//painting form//
+let formEl=document.createElement("form");
+setAttributes(formEl,{id:"searchForm",autoComplete:"off",class:"w-full max-w-lg relative mx-auto flex  items-center gap-6"});
+navbar.appendChild(formEl);
+//painting label//
+let labelEl=document.createElement("label");
+setAttributes(labelEl,{for:"js-search-input"})
+formEl.appendChild(labelEl);
+//painting input//
+let inputEl=document.createElement("input");
+setAttributes(inputEl,{type:"text",id:"js-search-input",class:" w-72 mt-2 px-2 py-1 rounded  outline-none mb-3 text-black"})
+formEl.appendChild(inputEl);
+//paint ul//
+let products=document.createElement("ul");
+setAttributes(products,{class:"js-products text-black absolute w-full top-full border bg-white hidden"});
+formEl.appendChild(products);
+//creating links//
+//myAccount link//
+let myAccount=document.createElement("a");
+setAttributes(myAccount,{href:"#"})
+myAccount.textContent=" Account";
+formEl.appendChild(myAccount);
 
-let searchInput = document.getElementById("js-search-input");
-let products = document.querySelector(".js-products");
+let becomeSeller=document.createElement("a");
+setAttributes(myAccount,{href:"#",class:""})
+becomeSeller.textContent="Seller";
+formEl.appendChild(becomeSeller);
+let cart=document.createElement("a");
+setAttributes(myAccount,{href:"#",class:""})
+cart.textContent="Cart";
+formEl.appendChild(cart);
+//painting toggle//
+let toggleButton=document.createElement("button");
+setAttributes(toggleButton,{class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full border-2 border-white"});
+toggleButton.textContent="Light";
+formEl.appendChild(toggleButton);
+
+let searchInput=document.getElementById("js-search-input");
+
+//light mode variable//
 
 function productListing(value) {
 
@@ -293,3 +345,34 @@ function enteredValue(ev) {
 }
 //input event has been listened here//
 searchInput.addEventListener("input", enteredValue);
+
+let lightMode= false;
+function themeToggler(e){
+    e.preventDefault();
+    
+    
+    
+    if(lightMode === false){
+        
+        toggleButton.textContent="Dark";
+        document.body.style.backgroundColor="black"; 
+        toggleButton.style.color="white";
+        formEl.style.color="white";
+        lightMode = true;
+    }
+    
+   else{
+    document.body.style.backgroundColor="white"; 
+    toggleButton.textContent="Light";
+    formEl.style.color="black";
+    toggleButton.style.color="black";
+    toggleButton.style.border="2px solid black";
+    lightMode = false;
+   }
+
+}
+
+
+
+  //add event listner on toogle btn//
+toggleButton.addEventListener("click",themeToggler)
